@@ -1,0 +1,40 @@
+int velocity = 80;
+    int Kp = 5;
+    int Kd = 3;
+
+void setup() {
+  // put your setup code here, to run once:
+
+
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  //dl, dr, df
+
+    if(dl < 15 && dr < 15 && df > 10){
+      follow_tunnel();
+    }
+    else {
+      stop();
+    }
+
+}
+
+
+void follow_tunnel(){
+  error = dl - dr;
+  correction = Kp * error + Kd * (lastError - error);
+  //correction unlimited hobe na
+  lMotorSpeed = velocity + correction;
+  rMotorSpeed = velocity - correction;
+
+  //lMotorSpeed o rMotorSpeed unlimited hobe na
+
+  motor(lMotorSpeed, rMotorSpeed);
+
+  delayMicroSeconds(4000);
+
+}
